@@ -1,0 +1,4 @@
+assets/images/covers/*
+.DS_Store
+test/fixtures/*jpg
+node_modules

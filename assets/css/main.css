@@ -1,0 +1,49 @@
+#header {
+  margin: auto;
+  width: 300px;
+}
+
+body {
+  font-family: helvetica;
+  background-color: black;
+  color: white;
+}
+
+.cover {
+  width: 128px;
+  height: 128px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  float: right;
+}
+
+.track {
+  width: 500px;
+  height: 140px;
+  margin: auto;
+  background-color: rgb(30, 30, 30);
+  position: relative;
+  padding: 5px;
+}
+
+.title {
+  size: 30px;
+  font-weight: bold;
+}
+
+.controls {
+  bottom: 20px;
+  position: absolute;
+  color: rgb(200, 200, 200);
+}
+
+.controls input {
+  width: 60px;
+  background: transparent;
+  color: rgb(200, 200, 200);
+}
+
+.controls a {
+  color: rgb(200, 200, 200);
+}
