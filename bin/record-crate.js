@@ -3,7 +3,7 @@
 var yargs = require('yargs')
   .options('m', {
     alias: 'music-folder',
-    default: '/Users/benjamincoe/Dropbox/muzik/',
+    default: '/music',
     description: 'folder to recursively crawl for music'
   })
   .options('a', {
