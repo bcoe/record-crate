@@ -3,24 +3,45 @@
 var yargs = require('yargs')
   .options('m', {
     alias: 'music-folder',
-    default: '/Users/benjamincoe/Dropbox/muzik/'
+    default: '/Users/benjamincoe/Dropbox/muzik/',
+    description: 'folder to recursively crawl for music'
+  })
+  .options('a', {
+    alias: 'app',
+    default: '/Applications/Ableton Live 9 Standard.app/',
+    description: 'application to open tracks in'
+  })
+  .options('p', {
+    alias: 'port',
+    default: '5000',
+    description: 'port to run record-crate server on'
+  })
+  .options('e', {
+    alias: 'es-url',
+    default: 'localhost:9200',
+    description: 'ElasticSearch url to save music-collection to'
   }),
   chalk = require('chalk'),
   commands = {
     'index': {
-      description: 'index:\t index your music-folder.',
+      description: 'index:\t index your music-folder.\n',
       command: function(args) {
         (new Indexer({
-          musicFolder: args['music-folder']
+          musicFolder: args['music-folder'],
+          esUrl: args['es-url']
         })).index(function() {
-          console.log(chalk.green("finished indexing '" + args['music-folder'] + "', run record-crate serve."));
+          console.log(chalk.green("finished indexing '" + args['music-folder'] + "', run record-crate start."));
         });
       }
     },
     'start': {
       description: 'start:\t start the record-crate server.',
       command: function(args) {
-        new Server();
+         new Server({
+          esUrl: args['es-url'],
+          app: args['app'],
+          port: args['port']
+        }).start();
       }
     }
   },
