@@ -24,7 +24,7 @@ var yargs = require('yargs')
   chalk = require('chalk'),
   commands = {
     'index': {
-      description: 'index:\t index your music-folder.\n',
+      description: 'index:            index your music-folder.\n',
       command: function(args) {
         (new Indexer({
           musicFolder: args['music-folder'],
@@ -35,7 +35,7 @@ var yargs = require('yargs')
       }
     },
     'start': {
-      description: 'start:\t start the record-crate server.',
+      description: 'start:            start the record-crate server.\n',
       command: function(args) {
          new Server({
           esUrl: args['es-url'],
@@ -43,11 +43,54 @@ var yargs = require('yargs')
           port: args['port']
         }).start();
       }
+    },
+    'install': {
+      description: 'install:          install os-service-wrapper.\n',
+      command: function(args) {
+        ndm.install();
+      }
+    },
+    'uninstall': {
+      description: 'uninstall:        remove os-service-wrapper.\n',
+      command: function(args) {
+        ndm.remove();
+      }
+    },
+    'start-service': {
+      description: 'start-service:    start the os-service-wrapper.\n',
+      command: function(args) {
+        ndm.start();
+      }
+    },
+    'stop-service': {
+      description: 'stop-service:     stop the os-service-wrapper.\n',
+      command: function(args) {
+        ndm.stop();
+      }
+    },
+    'restart-service': {
+      description: 'restart-service:  restart the os-service-wrapper.\n',
+      command: function(args) {
+        ndm.restart();
+      }
+    },
+    'run-script': {
+      description: 'run-script:       run script using os-service-wrapper env.\n',
+      command: function(args) {
+        ndm.runScript();
+      }
+    },
+    'list-scripts': {
+      description: 'list-scripts:     list available scripts.\n',
+      command: function(args) {
+        ndm.listScripts();
+      }
     }
   },
   Indexer = require('../lib/indexer'),
   Server = require('../lib/server'),
-  usageString = "record-crate: index you music folder, DJ sick sets.\n\n";
+  usageString = "record-crate: index you music folder, DJ sick sets.\n\n",
+  ndm = require('ndm')('record-crate');
 
 // generate usage string.
 Object.keys(commands).forEach(function(command) {
