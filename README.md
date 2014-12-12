@@ -15,8 +15,10 @@ your music collection.
 ## Setting Up
 
 1. install ElasticSearch `brew install elasticsearch`.
-2. index your music folder `record-crate index --music-folder=/foo/bar/music`
-3. start the webserver: `record-crate start`
+2. install record-crate `npm install record-crate -g`.
+  * if it asks for `sudo`, read this post: http://howtonode.org/introduction-to-npm
+3. index your music folder `record-crate index --music-folder=/foo/bar/music`
+4. start the webserver: `record-crate start`
 
 ## Contributing
 
