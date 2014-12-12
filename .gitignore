@@ -3,3 +3,4 @@ assets/images/covers/*
 test/fixtures/*jpg
 node_modules
 .env
+logs

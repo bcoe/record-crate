@@ -14,11 +14,24 @@ your music collection.
 
 ## Setting Up
 
-1. install ElasticSearch `brew install elasticsearch`.
+1. install ElasticSearch:
+  * on OSX,  `brew install elasticsearch`.
+  * on Ubuntu, https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-on-an-ubuntu-vps
 2. install record-crate `npm install record-crate -g`.
   * if it asks for `sudo`, read this post: http://howtonode.org/introduction-to-npm
-3. index your music folder `record-crate index --music-folder=/foo/bar/music`
-4. start the webserver: `record-crate start`
+3. index your music folder `record-crate index --music-folder=/foo/bar/music`.
+4. start the webserver: `record-crate start`.
+
+**Or,**
+
+_You can also install record-crate as an os-service-wrapper:_
+
+1. install ElasticSearch `brew install elasticsearch`.
+2. install record-crate `npm install record-crate -g`.
+3. install the service `record-crate install`.
+4. start the service `record-crate start-service`.
+
+_this has the advantage of storing your configuration settings for you._
 
 ## Contributing
 
