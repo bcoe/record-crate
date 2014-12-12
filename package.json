@@ -1,6 +1,6 @@
 {
   "name": "record-crate",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "index, organize, and search your music collection, DJ sick sets.",
   "main": "index.js",
   "bin": "./bin/record-crate.js",

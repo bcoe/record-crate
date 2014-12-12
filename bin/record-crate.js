@@ -73,18 +73,6 @@ var yargs = require('yargs')
       command: function(args) {
         ndm.restart();
       }
-    },
-    'run-script': {
-      description: 'run-script:       run script using os-service-wrapper env.\n',
-      command: function(args) {
-        ndm.runScript();
-      }
-    },
-    'list-scripts': {
-      description: 'list-scripts:     list available scripts.\n',
-      command: function(args) {
-        ndm.listScripts();
-      }
     }
   },
   Indexer = require('../lib/indexer'),
