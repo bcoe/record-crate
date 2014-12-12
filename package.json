@@ -1,9 +1,12 @@
 {
   "name": "record-crate",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "index, organize, and search your music collection, DJ sick sets.",
   "main": "index.js",
   "bin": "./bin/record-crate.js",
+  "repository": {
+    "url": "git://github.com:bcoe/record-crate.git"
+  },
   "scripts": {
     "start": "node ./bin/record-crate.js start",
     "prestart": "browserify ./lib/browser/*.js | uglifyjs > assets/javascript/include.js",
