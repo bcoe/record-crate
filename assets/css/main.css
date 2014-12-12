@@ -27,6 +27,10 @@ body {
   padding: 5px;
 }
 
+.even {
+  background-color: rgb(60, 60, 60);
+}
+
 .title {
   size: 30px;
   font-weight: bold;
