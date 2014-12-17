@@ -31,6 +31,7 @@ var yargs = require('yargs')
           esUrl: args['es-url']
         })).index(function() {
           console.log(chalk.green("finished indexing '" + args['music-folder'] + "', run record-crate start."));
+          process.exit();
         });
       }
     },
