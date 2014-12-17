@@ -1,8 +1,16 @@
 <link rel="import" href="../base-page/base-page.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/core-icons/av-icons.html">
 
-<polymer-element name="info-page" extends="base-page" attributes="contactId contacts" layout vertical>
+<polymer-element name="info-page" extends="base-page" attributes="crateId crate" layout vertical>
   <template>
     <link rel="stylesheet" href="info-page.css">
+
+    <core-ajax id="play"
+               url="//localhost:5000/open"
+               body='{"path":"{{crate_.path}}"}'
+               handleAs="json"
+               method="POST"></core-ajax>
 
     <!--
     On larger screens, change the behavior of the header panel so it doesn't
@@ -21,66 +29,44 @@
         <a href="/" on-click="{{goBack}}">
           <paper-icon-button icon="arrow-back"></paper-icon-button>
         </a>
-        <div id="title" class="bottom indent">{{contacts[contactId].name}}</div>
+        <div id="title" class="bottom indent">{{crate_.title}}</div>
       </core-toolbar>
       <div content>
 
         <div class="card-header" hidden?="{{!largeScreen}}">
           <div class="single-line" layout horizontal center>
-            <core-image src="{{contact_.avatar}}" preload sizing="cover">
+            <core-image src="/images/covers/{{crate_.images[0]}}" preload sizing="cover">
             </core-image>
-            <div class="card-name">{{contact_.name}}</div>
+            <div class="card-name">{{crate_.title}}</div>
           </div>
         </div>
 
-        <!-- Phone -->
-        <div class="group">
-          <div class="item">
-            <core-icon icon="app:phone"></core-icon>
-            <div class="double-line-1">(555) 546-0060</div>
-            <div class="double-line-2">Home</div>
-          </div>
-          <div class="item">
-            <div class="double-line-1">(555) 233-8464</div>
-            <div class="double-line-2">Work</div>
-          </div>
-          <div class="item">
-            <div class="double-line-1">(555) 158-2516</div>
-            <div class="double-line-2">Cell</div>
+        <div horizontal center-justified layout>
+          <div>
+            <paper-icon-button class="red blueRipple" icon="av:play-circle-fill" title="Play now" tabindex="0" id="playButton"></paper-icon-button>
           </div>
         </div>
 
-        <!-- Email -->
         <div class="group">
           <div class="item">
-            <core-icon icon="mail"></core-icon>
-            <div class="double-line-1">truefacts@fruitbat.com</div>
-            <div class="double-line-2">Home</div>
+            <core-icon icon="av:artist"></core-icon>
+            <div class="double-line-1">{{crate_.artist}}</div>
+            <div class="double-line-2">Artist</div>
           </div>
           <div class="item">
-            <div class="double-line-1">parkourian@thegoogles.com</div>
-            <div class="double-line-2">Work</div>
+            <core-icon icon="av:album"></core-icon>
+            <div class="double-line-1">{{crate_.album}}</div>
+            <div class="double-line-2">Album</div>
           </div>
           <div class="item">
-            <div class="double-line-1">anakedpaul@http203.com</div>
-            <div class="double-line-2">Personal</div>
-          </div>
-        </div>
-
-        <!-- Location -->
-        <div class="group">
-          <div class="item">
-            <core-icon icon="room"></core-icon>
-            <div class="double-line-1">123 Chicken Dinner Drive</div>
-            <div class="double-line-2">Home</div>
+            <core-icon icon="av:av-timer"></core-icon>
+            <div class="double-line-1">{{crate_.year}}</div>
+            <div class="double-line-2">Year</div>
           </div>
           <div class="item">
-            <div class="double-line-1">414 Possum Avenue</div>
-            <div class="double-line-2">Work</div>
-          </div>
-          <div class="item">
-            <div class="double-line-1">1969 Sunshine Boardwalk</div>
-            <div class="double-line-2">Vacation</div>
+            <core-icon icon="av:genres"></core-icon>
+            <div class="double-line-1">{{crate_.genre}}</div>
+            <div class="double-line-2">Genre</div>
           </div>
         </div>
       </div>
@@ -99,6 +85,11 @@
           titleStyle.transform = titleStyle.webkitTransform =
             'scale(' + scale + ') translateZ(0)';
         });
+
+        var playAjaxRequest = this.$.play;
+        this.$.playButton.addEventListener('click', function(e) {
+          playAjaxRequest.go();
+        });
       },
       willPrepare: function() {
         this.super();
@@ -109,12 +100,12 @@
         // so they see the full profile photo
         this.$.scrollHeaderPanel.scroller.scrollTop = 0;
       },
-      contactIdChanged: function(oldVal, newVal) {
-        this.contact_ = this.contacts[newVal];
+      crateIdChanged: function(oldVal, newVal) {
+        this.crate_ = this.crate.tracks[newVal];
         if (this.largeScreen) return;
         // Update the core-scroll-header-panel's background image with the
         // user's avatar if we're on a small screen
-        this.$.scrollHeaderPanel.$.headerBg.style.background = 'url('+this.contact_.avatar+') 0 / cover no-repeat';
+        this.$.scrollHeaderPanel.$.headerBg.style.background = 'url('+this.crate_.images[0]+') 0 / cover no-repeat';
       }
     });
   })();

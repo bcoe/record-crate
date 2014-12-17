@@ -54,7 +54,7 @@
                                  scrollTarget="{{$.headerPanel.scroller}}"
                                  runwayFactor="5">
               <template>
-                <a href="{{id | getUrl}}" on-click="{{navigate}}">
+                <a href="{{index | getUrl}}" on-click="{{navigate}}">
                   <div class="row" layout horizontal center>
                     <core-image src="/images/covers/{{model.images[0]}}"
                                 preload="true"
@@ -62,7 +62,11 @@
                                 sizing="cover"
                                 style="background-color: rgb(55, 55, 55);">
                     </core-image>
-                    <div flex>{{model.title}}</div>
+                    <div flex>
+                      <strong>{{model.title}}</strong>
+                      <span class="bpm">{{model.bpm}}</span>
+                      <p>{{model.artist}}</p>
+                    </div>
                   </div>
                 </a>
               </template>

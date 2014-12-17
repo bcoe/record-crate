@@ -55,6 +55,21 @@ paper-menu-button paper-item {
 }
 .row div {
   margin-left: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.row .bpm {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  margin-top: -50px;
+  font-size: 50px;
+  opacity: 0.5;
+  display: block;
+  border-radius: 50%;
+  background: #000B79;
+  padding: 20px;
 }
 paper-fab {
   position: fixed;

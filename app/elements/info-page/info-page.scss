@@ -28,7 +28,7 @@ core-toolbar paper-icon-button {
 }
 .card-header {
   height: 260px;
-  background: url(/images/paperscape2.jpg);
+  background: url(/images/paperscape1.jpg);
   background-size: cover;
   color: #FFFFFF;
   position: relative;
@@ -47,6 +47,7 @@ core-toolbar paper-icon-button {
   color: #FFFFFF;
   margin-left: 16px;
   font-size: 24px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 .group {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -56,6 +57,7 @@ core-toolbar paper-icon-button {
 .item {
   padding: 10px 72px;
   color: rgb(102, 102, 102);
+  position: relative;
 }
 .item core-icon {
   position: absolute;
@@ -71,6 +73,41 @@ core-toolbar paper-icon-button {
   font-size: 13px;
   line-height: 13px;
   color: rgba(0, 0, 0, 0.4);
+}
+paper-icon-button {
+  margin-top: 10px;
+  vertical-align: middle;
+}
+
+paper-icon-button::shadow #icon {
+  height: 50px;
+  width: 50px;
+}
+
+paper-icon-button.hover:hover {
+  background: #eee;
+  border-radius: 50%;
+}
+
+paper-icon-button.red {
+  color: #fe774d;
+}
+
+paper-icon-button.blueRipple::shadow #ripple {
+  color: #4285f4;
+}
+
+paper-icon-button.huge::shadow #icon {
+  width: 100px;
+  height: 100px;
+}
+
+/*      core-selector paper-icon-button:not([active])::shadow core-icon {
+  color: #c9c9c9;
+}
+*/
+paper-icon-button.custom {
+  color: #a9edff;
 }
 @media screen and (min-width: 640px) {
   :host {

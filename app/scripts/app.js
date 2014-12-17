@@ -27,11 +27,11 @@
       pages.selected = 0;
     };
 
-    var info = function(category, musicId) {
+    var info = function(category, crateId) {
       if (!app.crate) {
         return app.router.setRoute(DEFAULT_ROUTE);
       }
-      infoPage.musicId = musicId;
+      infoPage.crateId = crateId;
       pages.selected = 1;
     };
 
