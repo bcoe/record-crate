@@ -1,0 +1,79 @@
+@import '../styles/base';
+
+core-menu a {
+  color: $dark-text;
+}
+.content {
+  background-color: #FFFFFF;
+}
+core-toolbar {
+  color: $light-text;
+  background-color: $primary-color;
+}
+core-toolbar [icon="menu"] {
+  padding-left: 0;
+}
+#menuBtn {
+  margin-right: 0;
+}
+core-toolbar [icon="more-vert"] {
+  padding-right: 0;
+}
+#title {
+  margin-left: 16px;
+}
+paper-menu-button paper-item {
+  color: $dark-text;
+}
+[drawer] {
+  background-color: white;
+}
+#list a {
+  color: #666666;
+  text-decoration: none;
+}
+.row {
+  padding: 16px 16px;
+  cursor: pointer;
+}
+.row core-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+#list a:nth-of-type(1n) core-image {
+  background-color: #FCE4EC;
+}
+#list a:nth-of-type(2n) core-image {
+  background-color: #F8BBD0;
+}
+#list a:nth-of-type(3n) core-image {
+  background-color: #F48FB1;
+}
+#list a:nth-of-type(4n) core-image {
+  background-color: #F06292;
+}
+#list a:nth-of-type(5n) core-image {
+  background-color: #EC407A;
+}
+.row div {
+  margin-left: 16px;
+}
+paper-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+@media screen and (min-width: 640px) {
+  :host {
+    background-color: transparent;
+  }
+  .content {
+    margin: 64px auto;
+    width: 640px;
+  }
+  // paper-fab {
+  //   top: 264px;
+  //   right: 64px;
+  // }
+}
