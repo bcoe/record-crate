@@ -43,9 +43,9 @@
     };
 
     var routes = {
+      '/music/index': index,
       '/music/:category': crate,
-      '/music/:category/:id': info,
-      '/music/index': index
+      '/music/:category/:id': info
     };
 
     var router = app.router = Router(routes);

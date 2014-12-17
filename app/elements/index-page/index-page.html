@@ -1,6 +1,5 @@
 <link rel="import" href="../base-page/base-page.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <polymer-element name="index-page" extends="base-page" layout vertical>
@@ -9,95 +8,35 @@
 
     <core-header-panel id="headerPanel" fit mode="seamed">
 
+      <core-ajax id="ajaxIndex"
+               url="//localhost:5000/reindex"
+               body='{"path":"{{path}}"}'
+               handleAs="json"
+               method="POST"
+               on-core-response="{{goBack}}"></core-ajax>
+
       <core-toolbar>
         <a href="/" on-click="{{goBack}}">
           <paper-icon-button icon="arrow-back"></paper-icon-button>
         </a>
-        <div id="title" flex>{{contactName}}</div>
-        <a href="/" on-click="{{goBack}}">
-          <paper-icon-button icon="check"></paper-icon-button>
+        <div id="title" flex>Index your music collection</div>
+        <a id="click-index-music" on-click="{{indexMusic}}">
+          <paper-icon-button id="check-index-music" icon="check"></paper-icon-button>
         </a>
       </core-toolbar>
 
       <div class="content">
-        <!-- Contact photo area -->
-        <div id="contactPhoto" layout horizontal center-justified end>
-          <core-icon id="iconEmptyContact" icon="app:person"></core-icon>
-        </div>
 
-        <!-- Contact form -->
-        <div id="contactForm" style="position: relative;">
+        <!-- Index form -->
+        <div id="indexForm" style="position: relative;">
 
-          <a href="#">
-            <paper-fab icon="app:camera-alt"></paper-fab>
-          </a>
-
-          <!-- Name -->
+          <!-- Path -->
           <div class="formRow" layout horizontal center>
             <div class="item item-icon">
-              <core-icon icon="social:person"></core-icon>
+              <core-icon icon="folder"></core-icon>
             </div>
-            <paper-input class="item item-input" label="Name"
-                         value="{{contactName}}" flex>
-            </paper-input>
-          </div>
-
-          <!-- Phone -->
-          <div class="formRow" layout horizontal center>
-            <div class="item item-icon">
-              <core-icon icon="app:phone"></core-icon>
-            </div>
-            <paper-input class="item item-input" label="Phone" flex>
-            </paper-input>
-            <paper-dropdown-menu class="item item-menu">
-              <paper-dropdown class="dropdown" halign="right">
-                <core-menu class="menu" selected="Mobile" valueattr="label">
-                  <paper-item label="Mobile">Mobile</paper-item>
-                  <paper-item label="Work">Work</paper-item>
-                  <paper-item label="Home">Home</paper-item>
-                </core-menu>
-              </paper-dropdown>
-            </paper-dropdown-menu>
-          </div>
-
-          <!-- Email -->
-          <div class="formRow" layout horizontal center>
-            <div class="item item-icon">
-              <core-icon icon="mail"></core-icon>
-            </div>
-            <paper-input class="item item-input" label="Email" flex></paper-input>
-            <paper-dropdown-menu class="item item-menu">
-              <paper-dropdown class="dropdown" halign="right">
-                <core-menu class="menu" selected="Work" valueattr="label">
-                  <paper-item label="Work">Work</paper-item>
-                  <paper-item label="Home">Home</paper-item>
-                </core-menu>
-              </paper-dropdown>
-            </paper-dropdown-menu>
-          </div>
-
-          <!-- Address -->
-          <div class="formRow" layout horizontal center>
-            <div class="item item-icon">
-              <core-icon icon="room"></core-icon>
-            </div>
-            <paper-input class="item item-input" label="Address" flex></paper-input>
-            <paper-dropdown-menu class="item item-menu">
-              <paper-dropdown class="dropdown" halign="right">
-                <core-menu class="menu" selected="Home" valueattr="label">
-                  <paper-item label="Work">Work</paper-item>
-                  <paper-item label="Home">Home</paper-item>
-                </core-menu>
-              </paper-dropdown>
-            </paper-dropdown-menu>
-          </div>
-
-          <!-- Add note -->
-          <div class="formRow" layout horizontal center>
-            <div class="item item-icon">
-              <core-icon icon="add"></core-icon>
-            </div>
-            <paper-input class="item item-input" label="Add note" multiline flex>
+            <paper-input class="item item-input" label="Path"
+                         value="{{path}}" flex>
             </paper-input>
           </div>
 
@@ -109,14 +48,17 @@
   <script>
   (function() {
     Polymer({
-      publish: {
-        contacts: null
-      },
       willPrepare: function() {
         this.super();
         // Reset the scroller so every time the user comes to the add page
         // they see the top of the form
         this.$.headerPanel.scroller.scrollTop = 0;
+      },
+      indexMusic: function() {
+        this.$['click-index-music']['on-click'] = '';
+        this.$['check-index-music'].className = 'animate-spinning';
+        this.$['check-index-music'].icon = 'refresh';
+        this.$.ajaxIndex.go();
       }
     });
   })();
