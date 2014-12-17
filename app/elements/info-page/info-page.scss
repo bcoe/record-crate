@@ -8,20 +8,20 @@ core-scroll-header-panel::shadow #condensedHeaderBg {
   background-color: $primary-color;
 }
 core-toolbar {
-  color: #F1F1F1;
-  background-color: transparent;
+  color: $light-text;
+  background-color: $primary-color;
 }
 core-toolbar a {
-  color: #F1F1F1;
+  color: $light-text;
+}
+core-toolbar [icon="arrow-back"] {
+  padding-left: 0;
 }
 core-toolbar paper-icon-button {
   display: block;
   padding-left: 0;
 }
 #title {
-  -webkit-transform-origin: 0;
-  transform-origin: 0;
-  font-size: 40px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -65,6 +65,13 @@ core-toolbar paper-icon-button {
   top: 24px;
   color: rgb(33, 33, 33);
 }
+.item-input {
+  padding: 0;
+}
+.item-input::shadow #decorator {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .double-line-1 {
   margin-top: 5px;
   margin-bottom: 6px;
@@ -74,12 +81,18 @@ core-toolbar paper-icon-button {
   line-height: 13px;
   color: rgba(0, 0, 0, 0.4);
 }
+
+.animate-spinning {
+  -webkit-animation: spin 2s infinite linear !important;
+          animation: spin 2s infinite linear !important;
+}
+
 paper-icon-button {
   margin-top: 10px;
   vertical-align: middle;
 }
 
-paper-icon-button::shadow #icon {
+paper-icon-button[icon="av:play-circle-fill"]::shadow #icon {
   height: 50px;
   width: 50px;
 }

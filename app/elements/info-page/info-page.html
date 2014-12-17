@@ -1,6 +1,8 @@
 <link rel="import" href="../base-page/base-page.html">
-<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="/bower_components/core-icons/av-icons.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/core-icons/av-icons.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <polymer-element name="info-page" extends="base-page" attributes="crateId crate" layout vertical>
   <template>
@@ -11,6 +13,13 @@
                body='{"path":"{{crate_.path}}"}'
                handleAs="json"
                method="POST"></core-ajax>
+
+    <core-ajax id="save"
+               url="//localhost:5000/save"
+               body='{"id":"{{crate_.id}}", "bpm":"{{crate_.bpm}}"}'
+               handleAs="json"
+               method="POST"
+               on-core-response="{{doneSavingCrate}}"></core-ajax>
 
     <!--
     On larger screens, change the behavior of the header panel so it doesn't
@@ -68,6 +77,18 @@
             <div class="double-line-1">{{crate_.genre}}&nbsp;</div>
             <div class="double-line-2">Genre</div>
           </div>
+          <div class="item">
+            <core-icon icon="av:equalizer"></core-icon>
+            <div class="double-line-1">
+              <paper-input class="item item-input" label="Path"
+                           value="{{crate_.bpm}}" flex>
+              </paper-input>&nbsp;
+              <a id="click-save-crate" on-click="{{saveCrate}}">
+                <paper-icon-button id="check-save-crate" icon="check"></paper-icon-button>
+              </a>
+            </div>
+            <div class="double-line-2">BPM</div>
+          </div>
         </div>
       </div>
     </core-scroll-header-panel>
@@ -90,6 +111,21 @@
         this.$.playButton.addEventListener('click', function(e) {
           playAjaxRequest.go();
         });
+      },
+      saveCrate: function() {
+        this.$['click-save-crate']['on-click'] = '';
+        this.$['check-save-crate'].className = 'animate-spinning';
+        this.$['check-save-crate'].icon = 'refresh';
+        this.$.save.go();
+      },
+      doneSavingCrate: function() {
+        var click = this.$['click-save-crate'];
+        var check = this.$['check-save-crate'];
+        setTimeout(function() {
+          click['on-click'] = '{{saveCrate}}';
+          check.className = '';
+          check.icon = 'check';
+        }, 1000);
       },
       willPrepare: function() {
         this.super();

@@ -48,32 +48,12 @@ core-toolbar [icon="arrow-back"] {
 .item-menu /deep/ #control[selected] {
   color: $dark-text-secondary;
 }
+
 .animate-spinning {
-  -webkit-animation: spin 2s infinite linear;
-          animation: spin 2s infinite linear;
+  -webkit-animation: spin 2s infinite linear !important;
+          animation: spin 2s infinite linear !important;
 }
 
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-  }
-}
 @media screen and (min-width: 640px) {
   :host {
     background-color: transparent;
