@@ -56,7 +56,11 @@
               <template>
                 <a href="{{id | getUrl}}" on-click="{{navigate}}">
                   <div class="row" layout horizontal center>
-                    <core-image src="{{model.images[0]}}" preload sizing="cover">
+                    <core-image src="/images/covers/{{model.images[0]}}"
+                                preload="true"
+                                fade="true"
+                                sizing="cover"
+                                style="background-color: lightgray;">
                     </core-image>
                     <div flex>{{model.title}}</div>
                   </div>
