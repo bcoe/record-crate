@@ -1,0 +1,150 @@
+<link rel="import" href="../base-page/base-page.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/core-icons/av-icons.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="info-page" extends="base-page" attributes="crateId crate" layout vertical>
+  <template>
+    <link rel="stylesheet" href="info-page.css">
+
+    <core-ajax id="play"
+               url="//localhost:5000/open"
+               body='{"path":"{{crate_.path}}"}'
+               handleAs="json"
+               method="POST"></core-ajax>
+
+    <core-ajax id="save"
+               url="//localhost:5000/save"
+               body='{"id":"{{crate_.id}}", "bpm":"{{crate_.bpm}}"}'
+               handleAs="json"
+               method="POST"
+               on-core-response="{{doneSavingCrate}}"></core-ajax>
+
+    <!--
+    On larger screens, change the behavior of the header panel so it doesn't
+    scroll away or do the condenses feature. Instead, treat its content like
+    a regular toolbar.
+    -->
+    <core-media-query query="min-width: 640px" queryMatches="{{largeScreen}}">
+    </core-media-query>
+
+    <core-scroll-header-panel id="scrollHeaderPanel"
+                              condenses?="{{!largeScreen}}"
+                              fixed?="{{largeScreen}}"
+                              flex>
+
+      <core-toolbar class="{{ {tall: !largeScreen} | tokenList}}">
+        <a href="/" on-click="{{goBack}}">
+          <paper-icon-button icon="arrow-back"></paper-icon-button>
+        </a>
+        <div id="title" class="bottom">{{crate_.title}}</div>
+      </core-toolbar>
+      <div content>
+
+        <div class="card-header" id="cardHeader" hidden?="{{!largeScreen}}">
+          <div class="single-line" layout horizontal center>
+            <div class="card-name">{{crate_.title}}</div>
+          </div>
+        </div>
+
+        <div horizontal center-justified layout>
+          <div>
+            <paper-icon-button class="red blueRipple" icon="av:play-circle-fill" title="Play now" tabindex="0" id="playButton"></paper-icon-button>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="item">
+            <core-icon icon="av:artist"></core-icon>
+            <div class="double-line-1">{{crate_.artist}}&nbsp;</div>
+            <div class="double-line-2">Artist</div>
+          </div>
+          <div class="item">
+            <core-icon icon="av:album"></core-icon>
+            <div class="double-line-1">{{crate_.album}}&nbsp;</div>
+            <div class="double-line-2">Album</div>
+          </div>
+          <div class="item">
+            <core-icon icon="av:av-timer"></core-icon>
+            <div class="double-line-1">{{crate_.year}}&nbsp;</div>
+            <div class="double-line-2">Year</div>
+          </div>
+          <div class="item">
+            <core-icon icon="av:genres"></core-icon>
+            <div class="double-line-1">{{crate_.genre}}&nbsp;</div>
+            <div class="double-line-2">Genre</div>
+          </div>
+          <div class="item">
+            <core-icon icon="av:equalizer"></core-icon>
+            <div class="double-line-1">
+              <paper-input class="item item-input" label="Path"
+                           value="{{crate_.bpm}}" flex>
+              </paper-input>&nbsp;
+              <a id="click-save-crate" on-click="{{saveCrate}}">
+                <paper-icon-button id="check-save-crate" icon="check"></paper-icon-button>
+              </a>
+            </div>
+            <div class="double-line-2">BPM</div>
+          </div>
+        </div>
+      </div>
+    </core-scroll-header-panel>
+  </template>
+  <script>
+  (function() {
+    Polymer({
+      domReady: function() {
+        // custom transformation: scale header's title
+        var titleStyle = this.$.title.style;
+        document.addEventListener('core-header-transform', function(e) {
+          var d = e.detail;
+          var m = d.height - d.condensedHeight;
+          var scale = Math.max(0.55, (m - d.y) / (m / 0.25) + 0.55);
+          titleStyle.transform = titleStyle.webkitTransform =
+            'scale(' + scale + ') translateZ(0)';
+        });
+
+        var playAjaxRequest = this.$.play;
+        this.$.playButton.addEventListener('click', function(e) {
+          playAjaxRequest.go();
+        });
+      },
+      saveCrate: function() {
+        this.$['click-save-crate']['on-click'] = '';
+        this.$['check-save-crate'].className = 'animate-spinning';
+        this.$['check-save-crate'].icon = 'refresh';
+        this.$.save.go();
+      },
+      doneSavingCrate: function() {
+        var click = this.$['click-save-crate'];
+        var check = this.$['check-save-crate'];
+        setTimeout(function() {
+          click['on-click'] = '{{saveCrate}}';
+          check.className = '';
+          check.icon = 'check';
+        }, 1000);
+      },
+      willPrepare: function() {
+        this.super();
+        // Measure the core-scroll-header-panel, otherwise its height will
+        // be messed up
+        this.$.scrollHeaderPanel.measureHeaderHeight();
+        // Reset the scroller so every time the user comes to the info page
+        // so they see the full profile photo
+        this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+      },
+      crateIdChanged: function(oldVal, newVal) {
+        this.crate_ = this.crate.tracks[newVal];
+        if(this.crate_.images[0]) {
+          this.$.cardHeader.style.background = 'url(/images/covers/'+this.crate_.images[0]+') 0 / cover no-repeat';
+        }
+        if (this.largeScreen) return;
+        // Update the core-scroll-header-panel's background image with the
+        // user's avatar if we're on a small screen
+        this.$.scrollHeaderPanel.$.headerBg.style.background = 'url(/images/covers/'+this.crate_.images[0]+') 0 / cover no-repeat';
+      }
+    });
+  })();
+  </script>
+</polymer-element>

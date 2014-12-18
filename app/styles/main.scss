@@ -1,0 +1,24 @@
+body {
+  background: #373737;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgba(#f4f4f4, 0.87);
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+  tap-highlight-color: rgba(255, 255, 255, 0);
+}
+html /deep/ a {
+  text-decoration: none;
+}
+// Temp fix for https://github.com/Polymer/paper-button/issues/30
+html /deep/ paper-icon-button /deep/ core-icon {
+  display: block;
+}
+
+html /deep/ core-icon {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  fill: currentcolor;
+  position: relative;
+  height: 24px;
+  width: 24px;
+}

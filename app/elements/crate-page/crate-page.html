@@ -1,0 +1,99 @@
+<link rel="import" href="../base-page/base-page.html">
+<link rel="import" href="../../bower_components/core-list/core-list.html">
+<link rel="import" href="../../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+
+<polymer-element name="crate-page" extends="base-page"
+                 attributes="crate heading">
+  <template>
+    <link rel="stylesheet" href="crate-page.css">
+
+    <core-drawer-panel id="drawerPanel" forceNarrow>
+
+      <!-- Drawer -->
+      <core-header-panel drawer mode="seamed">
+        <core-toolbar>Menu</core-toolbar>
+        <core-menu selected="0" on-core-select="{{closeDrawer}}">
+          <paper-item noink>
+            <a href="/music/all" on-click="{{navigate}}">
+              All
+            </a>
+          </paper-item>
+        </core-menu>
+      </core-header-panel>
+
+      <!-- Main -->
+      <div main layout vertical>
+        <core-header-panel id="headerPanel" mode="seamed" flex>
+          <core-toolbar>
+            <paper-icon-button icon="menu" core-drawer-toggle>
+            </paper-icon-button>
+            <div id="title" flex>{{heading}}</div>
+
+            <!--<paper-menu-button id="menuBtn" noink>
+              <paper-icon-button icon="more-vert" noink></paper-icon-button>
+              <paper-dropdown class="dropdown" halign="right">
+                <core-menu class="menu">
+                  <paper-item>Settings</paper-item>
+                  <paper-item>Help</paper-item>
+                  <paper-item>Feedback</paper-item>
+                </core-menu>
+              </paper-dropdown>
+            </paper-menu-button>-->
+
+          </core-toolbar>
+          <div class="content">
+
+            <core-list id="list" data="{{crate.tracks}}"
+                                 scrollTarget="{{$.headerPanel.scroller}}"
+                                 runwayFactor="5">
+              <template>
+                <a href="{{index | getUrl}}" on-click="{{navigate}}">
+                  <div class="row" layout horizontal center>
+                    <core-image src="/images/covers/{{model.images[0]}}"
+                                preload="true"
+                                fade="true"
+                                sizing="cover"
+                                style="background-color: rgb(55, 55, 55);">
+                    </core-image>
+                    <div flex>
+                      <strong>{{model.title}}</strong>
+                      <span class="bpm">{{model.bpm}}</span>
+                      <p>{{model.artist}}</p>
+                    </div>
+                  </div>
+                </a>
+              </template>
+            </core-list>
+
+          </div>
+        </core-header-panel>
+
+        <!-- Add contact -->
+        <a href="/music/index" on-click="{{navigate}}">
+          <paper-fab icon="refresh" noink></paper-fab>
+        </a>
+      </div>
+    </core-drawer-panel>
+  </template>
+  <script>
+  (function() {
+    Polymer({
+      willPrepare: function() {
+        this.super();
+        this.$.list.updateSize()
+      },
+      getUrl: function(idx) {
+        return window.location.pathname + '/' + idx;
+      },
+      closeDrawer: function() {
+        // Maybe this could wait till the next frame before animating
+        // out... right now it animates while the list is rebuilding
+        // and causes some jank
+        this.$.drawerPanel.closeDrawer();
+      }
+    });
+  })();
+  </script>
+</polymer-element>
