@@ -8,8 +8,8 @@
     "url": "git://github.com:bcoe/record-crate.git"
   },
   "scripts": {
-    "start": "node ./bin/record-crate.js start",
-    "prestart": "browserify ./lib/browser/*.js | uglifyjs > assets/javascript/include.js",
+    "start": "node ./bin/record-crate.js start | grunt serve",
+    "prestart": "bower install",
     "test": "./node_modules/.bin/lab -v -c",
     "index": "node ./bin/record-crate.js index"
   },

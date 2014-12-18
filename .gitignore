@@ -7,3 +7,5 @@ node_modules
 logs
 .tmp
 .sass-cache
+dist
+npm-debug.log
