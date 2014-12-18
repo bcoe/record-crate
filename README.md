@@ -2,7 +2,7 @@
 
 index, organize, and search your music collection, DJ sick sets.
 
-![record-crate](https://github.com/bcoe/record-crate/raw/master/assets/images/record-crate.png "record-crate")
+![record-crate](https://github.com/bcoe/record-crate/raw/master/app/images/record-crate.png "record-crate")
 
 ## How it works
 
