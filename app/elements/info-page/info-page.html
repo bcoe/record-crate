@@ -42,10 +42,8 @@
       </core-toolbar>
       <div content>
 
-        <div class="card-header" hidden?="{{!largeScreen}}">
+        <div class="card-header" id="cardHeader" hidden?="{{!largeScreen}}">
           <div class="single-line" layout horizontal center>
-            <core-image src="/images/covers/{{crate_.images[0]}}" preload sizing="cover">
-            </core-image>
             <div class="card-name">{{crate_.title}}</div>
           </div>
         </div>
@@ -138,10 +136,13 @@
       },
       crateIdChanged: function(oldVal, newVal) {
         this.crate_ = this.crate.tracks[newVal];
+        if(this.crate_.images[0]) {
+          this.$.cardHeader.style.background = 'url(/images/covers/'+this.crate_.images[0]+') 0 / cover no-repeat';
+        }
         if (this.largeScreen) return;
         // Update the core-scroll-header-panel's background image with the
         // user's avatar if we're on a small screen
-        this.$.scrollHeaderPanel.$.headerBg.style.background = 'url('+this.crate_.images[0]+') 0 / cover no-repeat';
+        this.$.scrollHeaderPanel.$.headerBg.style.background = 'url(/images/covers/'+this.crate_.images[0]+') 0 / cover no-repeat';
       }
     });
   })();
