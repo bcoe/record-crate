@@ -21,11 +21,6 @@ core-toolbar paper-icon-button {
   display: block;
   padding-left: 0;
 }
-#title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .card-header {
   height: 260px;
   background: url(/images/paperscape1.jpg);
@@ -133,9 +128,6 @@ paper-icon-button.custom {
   core-toolbar {
     color: #F1F1F1;
     background-color: $primary-color;
-  }
-  #title {
-    font-size: 1.3em;
   }
   // paper-fab {
   //   top: 264px;
