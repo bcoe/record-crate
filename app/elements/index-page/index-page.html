@@ -1,0 +1,69 @@
+<link rel="import" href="../base-page/base-page.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="index-page" extends="base-page" layout vertical>
+  <template>
+    <link rel="stylesheet" href="index-page.css">
+
+    <core-header-panel id="headerPanel" fit mode="seamed">
+
+      <core-ajax id="ajaxIndex"
+               url="//localhost:5000/reindex"
+               body='{"path":"{{path}}"}'
+               handleAs="json"
+               method="POST"
+               on-core-response="{{goBack}}"></core-ajax>
+
+      <core-toolbar>
+        <a href="/" on-click="{{goBack}}">
+          <paper-icon-button icon="arrow-back"></paper-icon-button>
+        </a>
+        <div id="title" flex>Index your music collection</div>
+        <a id="click-index-music" on-click="{{indexMusic}}">
+          <paper-icon-button id="check-index-music" icon="check"></paper-icon-button>
+        </a>
+      </core-toolbar>
+
+      <div class="content">
+
+        <!-- Index form -->
+        <div id="indexForm" style="position: relative;">
+
+          <!-- Path -->
+          <div class="formRow" layout horizontal center>
+            <div class="item item-icon">
+              <core-icon icon="folder"></core-icon>
+            </div>
+            <paper-input class="item item-input" label="Path"
+                         value="{{path}}" flex>
+            </paper-input>
+          </div>
+
+        </div>
+      </div>
+
+    </core-header-panel>
+  </template>
+  <script>
+  (function() {
+    Polymer({
+      willPrepare: function() {
+        this.super();
+        // Reset the scroller so every time the user comes to the add page
+        // they see the top of the form
+        this.$.headerPanel.scroller.scrollTop = 0;
+        this.$['click-index-music']['on-click'] = '{{indexMusic}}';
+        this.$['check-index-music'].className = '';
+        this.$['check-index-music'].icon = 'check';
+      },
+      indexMusic: function() {
+        this.$['click-index-music']['on-click'] = '';
+        this.$['check-index-music'].className = 'animate-spinning';
+        this.$['check-index-music'].icon = 'refresh';
+        this.$.ajaxIndex.go();
+      }
+    });
+  })();
+  </script>
+</polymer-element>

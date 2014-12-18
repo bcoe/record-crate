@@ -1,0 +1,33 @@
+@import 'variables';
+
+*,*::after,*::before {
+  box-sizing: border-box;
+}
+:host {
+  display: block;
+  background-color: white;
+}
+paper-fab {
+  background-color: $accent-color;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}

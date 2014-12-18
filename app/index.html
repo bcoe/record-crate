@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Record Crate</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="msapplication-TileColor" content="#88211b">
+
+  <meta name="theme-color" content="#88211b">
+
+  <script>
+    if ('registerElement' in document
+      && 'createShadowRoot' in HTMLElement.prototype
+      && 'import' in document.createElement('link')
+      && 'content' in document.createElement('template')) {
+      // We're using a browser with native WC support!
+    } else {
+      document.write('<script src="/bower_components/webcomponentsjs/webcomponents.js"><\/script>');
+    }
+  </script>
+  <!-- build:vulcanized /elements/elements.critical.vulcanized.html -->
+  <link rel="import" href="/elements/elements.critical.html">
+  <!-- endbuild-->
+</head>
+
+<body unresolved>
+
+  <template id="app" is="auto-binding">
+    <core-ajax id="ajax"
+               url="//localhost:5000/"
+               body='{"q":"*"}'
+               handleAs="json"
+               method="POST"
+               response="{{crate}}"></core-ajax>
+    <core-media-query query="min-width: 640px" queryMatches="{{largeScreen}}">
+    </core-media-query>
+
+    <core-animated-pages id="pages" selected="{{selected}}"
+                         transitions="cross-fade fade-slide-up fade-scale" fit>
+
+      <section layout vertical>
+        <crate-page class="page" id="crate" crate="{{crate}}"
+                       cross-fade?="{{largeScreen}}"
+                       heading="{{heading}}"
+                       flex>
+        </crate-page>
+      </section>
+
+      <section layout vertical>
+        <info-page class="page" id="info" crate="{{crate}}"
+                   cross-fade?="{{largeScreen}}"
+                   fade-scale?="{{!largeScreen}}"
+                   flex>
+        </info-page>
+      </section>
+
+      <section layout vertical>
+        <index-page class="page" id="index" crate="{{crate}}"
+                  cross-fade?="{{largeScreen}}"
+                  fade-slide-up?="{{!largeScreen}}"
+                  flex>
+        </index-page>
+      </section>
+    </core-animated-pages>
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="/bower_components/director/build/director.js"></script>
+  <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>

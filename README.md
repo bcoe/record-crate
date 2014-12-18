@@ -12,6 +12,8 @@ music files, and creates an ElasticSearch index of your music.
 record-crate's web-interface lets you search, and add additional tags to
 your music collection.
 
+Currently, the record-crate server running by default on port 5000, serves as an API for the frontend (which runs via grunt by default on port 9000).
+
 ## Setting Up
 
 1. install ElasticSearch:
@@ -19,8 +21,9 @@ your music collection.
   * on Ubuntu, https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-on-an-ubuntu-vps
 2. install record-crate `npm install record-crate -g`.
   * if it asks for `sudo`, read this post: http://howtonode.org/introduction-to-npm
-3. index your music folder `record-crate index --music-folder=/foo/bar/music`.
-4. start the webserver: `record-crate start`.
+3. start the webserver: `record-crate start`.
+4. run `npm install` and `bower install` in the root
+5. start the frontend by running `grunt serve`
 
 **Or,**
 
