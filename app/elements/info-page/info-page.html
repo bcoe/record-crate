@@ -105,15 +105,6 @@
             'scale(' + scale + ') translateZ(0)';
         });
 
-        // Make the browser return when pressing "escape"
-        var poly = this;
-        document.addEventListener("keyup", function(e) {
-          if(e.keyCode == 27) {
-            e.preventDefault();
-            poly.fire('change-route-back');
-          }
-        });
-
         // Listen for a click on playButton
         var playAjaxRequest = this.$.play;
         this.$.playButton.addEventListener('click', function(e) {

@@ -11,6 +11,14 @@
         // so if you need to do anything with height in JavaScript
         // this is the time to do it :)
         willPrepare: function() {
+          // Make the browser return when pressing "escape"
+          var poly = this;
+          document.addEventListener("keyup", function(e) {
+            if(e.keyCode == 27) {
+              e.preventDefault();
+              poly.fire('change-route-back');
+            }
+          });
         },
         // `navigate` is called in response to someone clicking on
         // an anchor tag. The normal click behavior is stopped to
