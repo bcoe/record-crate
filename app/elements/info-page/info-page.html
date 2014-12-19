@@ -105,6 +105,7 @@
             'scale(' + scale + ') translateZ(0)';
         });
 
+        // Listen for a click on playButton
         var playAjaxRequest = this.$.play;
         this.$.playButton.addEventListener('click', function(e) {
           playAjaxRequest.go();
