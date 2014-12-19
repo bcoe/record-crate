@@ -1,13 +1,28 @@
 <link rel="import" href="../base-page/base-page.html">
 <link rel="import" href="../../bower_components/core-list/core-list.html">
-<link rel="import" href="../../bower_components/core-menu/core-menu.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-action-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <polymer-element name="crate-page" extends="base-page"
                  attributes="crate heading">
   <template>
     <link rel="stylesheet" href="crate-page.css">
+
+    <paper-action-dialog id="searchDialog">
+      <paper-item id="search-name" noink>
+        <paper-input class="item item-input"
+                     label="Name"
+                     value="{{name}}"
+                     id="searchInput"
+                     noink
+                     autofocus>
+        </paper-input>
+        <a id="click-search-name" on-click="{{searchName}}">
+          <paper-icon-button id="check-search-name" icon="check" affirmative></paper-icon-button>
+        </a>
+      </paper-item>
+    </paper-action-dialog>
 
     <core-drawer-panel id="drawerPanel" forceNarrow>
 
@@ -31,16 +46,9 @@
             </paper-icon-button>
             <div id="title" flex>{{heading}}</div>
 
-            <!--<paper-menu-button id="menuBtn" noink>
-              <paper-icon-button icon="more-vert" noink></paper-icon-button>
-              <paper-dropdown class="dropdown" halign="right">
-                <core-menu class="menu">
-                  <paper-item>Settings</paper-item>
-                  <paper-item>Help</paper-item>
-                  <paper-item>Feedback</paper-item>
-                </core-menu>
-              </paper-dropdown>
-            </paper-menu-button>-->
+            <paper-menu-button id="menuBtn" noink>
+              <paper-icon-button icon="search" noink on-tap="{{toggleSearch}}"></paper-icon-button>
+            </paper-menu-button>
 
           </core-toolbar>
           <div class="content">
@@ -80,9 +88,50 @@
   <script>
   (function() {
     Polymer({
-      willPrepare: function() {
+      _crate: null,
+      domReady: function() {
+        this.$.list.updateSize();
+
+        var d = this.$.searchDialog;
+        if (!d) {
+          return;
+        }
+        var s = this;
+
+        var searchButton = this.$['click-search-name'];
+        var event = new CustomEvent('click', {});
+        this.$.searchInput.addEventListener("keyup", function(e) {
+          if(e.keyCode == 13) {
+            e.preventDefault();
+            s.searchName();
+            d.toggle();
+          }
+        });
+
         this.super();
-        this.$.list.updateSize()
+      },
+      toggleSearch: function(e) {
+        var d = this.$.searchDialog;
+        if (!d) {
+          return;
+        }
+        d.toggle();
+        this.$.searchInput.focus();
+      },
+      searchName: function(e) {
+        if(this._crate === null)
+          this._crate = JSON.parse(JSON.stringify(this.crate));
+        this.crate.tracks = this._crate.tracks;
+
+        var search = this.$.searchInput.value;
+        if(search == '' || search == '*') {
+          return;
+        }
+
+        function hasElement(element) {
+          return element.title.toLowerCase().indexOf(search.toLowerCase()) > -1;
+        };
+        this.crate.tracks = this.crate.tracks.filter(hasElement);
       },
       getUrl: function(idx) {
         return window.location.pathname + '/' + idx;
