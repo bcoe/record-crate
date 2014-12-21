@@ -1,5 +1,4 @@
 app/images/covers/*
-app/bower_components
 .DS_Store
 test/fixtures/*jpg
 node_modules
