@@ -23,6 +23,7 @@ var yargs = require('yargs')
   }),
   chalk = require('chalk'),
   grunt = require('grunt'),
+  path = require('path'),
   commands = {
     'index': {
       description: 'index:            index your music-folder.\n',
@@ -41,6 +42,7 @@ var yargs = require('yargs')
       command: function(args) {
         // start the front-end server used
         // for serving polymer app.
+        grunt.file.setBase(path.resolve(__dirname, '../'));
         grunt.tasks(['serve']);
 
         // start the backend search/indexing
