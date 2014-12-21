@@ -22,6 +22,7 @@ var yargs = require('yargs')
     description: 'ElasticSearch url to save music-collection to'
   }),
   chalk = require('chalk'),
+  grunt = require('grunt'),
   commands = {
     'index': {
       description: 'index:            index your music-folder.\n',
@@ -38,7 +39,13 @@ var yargs = require('yargs')
     'start': {
       description: 'start:            start the record-crate server.\n',
       command: function(args) {
-         new Server({
+        // start the front-end server used
+        // for serving polymer app.
+        grunt.tasks(['serve']);
+
+        // start the backend search/indexing
+        // server.
+        new Server({
           esUrl: args['es-url'],
           app: args['app'],
           port: args['port']

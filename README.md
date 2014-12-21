@@ -22,8 +22,6 @@ Currently, the record-crate server running by default on port 5000, serves as an
 2. install record-crate `npm install record-crate -g`.
   * if it asks for `sudo`, read this post: http://howtonode.org/introduction-to-npm
 3. start the webserver: `record-crate start`.
-4. run `npm install` and `bower install` in the root
-5. start the frontend by running `grunt serve`
 
 **Or,**
 
@@ -35,6 +33,16 @@ _You can also install record-crate as an os-service-wrapper:_
 4. start the service `record-crate start-service`.
 
 _this has the advantage of storing your configuration settings for you._
+
+## Building Record-Crate
+
+To contribute to record-crate:
+
+1. clone [the git repo](https://github.com/bcoe/record-crate).
+2. run `npm install`.
+3. run `npm build`, to rebuild assets.
+
+**Patches welcome!**
 
 ## Contributing
 
