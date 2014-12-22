@@ -1,0 +1,10 @@
+app/images/covers/*
+.DS_Store
+test/fixtures/*jpg
+node_modules
+.env
+logs
+.tmp
+.sass-cache
+dist
+npm-debug.log
