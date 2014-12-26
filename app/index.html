@@ -41,7 +41,9 @@
 
   <template id="app" is="auto-binding">
     <core-ajax id="ajax"
-               url="//localhost:5000?q=*"
+               url="//localhost:5000"
+               params='{"q": "*"}'
+               headers='{"Content-Type": "application/json"}'
                handleAs="json"
                method="GET"
                response="{{crate}}"></core-ajax>
