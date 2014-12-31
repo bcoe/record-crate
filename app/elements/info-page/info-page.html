@@ -11,6 +11,7 @@
     <core-ajax id="play"
                url="//localhost:5000/open"
                body='{"path":"{{crate_.path}}"}'
+               headers='{"Content-Type": "application/json"}'
                handleAs="json"
                method="POST"></core-ajax>
 
@@ -18,6 +19,7 @@
                url="//localhost:5000/save"
                body='{"id":"{{crate_.id}}", "bpm":"{{crate_.bpm}}"}'
                handleAs="json"
+               headers='{"Content-Type": "application/json"}'
                method="POST"
                on-core-response="{{doneSavingCrate}}"></core-ajax>
 
@@ -105,6 +107,7 @@
             'scale(' + scale + ') translateZ(0)';
         });
 
+        // Listen for a click on playButton
         var playAjaxRequest = this.$.play;
         this.$.playButton.addEventListener('click', function(e) {
           playAjaxRequest.go();

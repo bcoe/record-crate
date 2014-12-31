@@ -1,0 +1,156 @@
+{
+  "took": 11,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 317,
+    "max_score": null,
+    "hits": [
+      {
+        "_index": "record-crate",
+        "_type": "song",
+        "_id": "18e395cfc7cb92c8637b06e59b3efcaefb1ecff2",
+        "_score": null,
+        "_source": {
+          "id": "18e395cfc7cb92c8637b06e59b3efcaefb1ecff2",
+          "title": "Enter The Seed (Original Mix)",
+          "sortable_title": "Enter The Seed (Original Mix)",
+          "artist": "Plantrae",
+          "album": "Taproot",
+          "path": "/music/emergency sick beats/4228566_Enter_the_Seed_Original_Mix.mp3",
+          "images": [
+            "18e395cfc7cb92c8637b06e59b3efcaefb1ecff2_0.jpg",
+            "18e395cfc7cb92c8637b06e59b3efcaefb1ecff2_1.png",
+            "18e395cfc7cb92c8637b06e59b3efcaefb1ecff2_2.jpg"
+          ],
+          "year": 2013,
+          "genre": [
+            "Glitch Hop"
+          ],
+          "bpm": null,
+          "created": "2014-12-18T17:42:11.000Z"
+        },
+        "sort": [
+          164,
+          "Enter The Seed (Original Mix)"
+        ]
+      },
+      {
+        "_index": "record-crate",
+        "_type": "song",
+        "_id": "26ab78ce4203016160dbaab0adb6c954c217592c",
+        "_score": null,
+        "_source": {
+          "id": "26ab78ce4203016160dbaab0adb6c954c217592c",
+          "title": "Play (Instrumental)",
+          "sortable_title": "Play (Instrumental)",
+          "album": "Play",
+          "path": "/music/emergency sick beats/4187666_Play_Instrumental.mp3",
+          "images": [
+            "26ab78ce4203016160dbaab0adb6c954c217592c_0.jpg",
+            "26ab78ce4203016160dbaab0adb6c954c217592c_1.png",
+            "26ab78ce4203016160dbaab0adb6c954c217592c_2.jpg"
+          ],
+          "year": 2011,
+          "genre": [
+            "Hip-Hop"
+          ],
+          "bpm": 150,
+          "created": "2014-12-18T17:42:04.000Z"
+        },
+        "sort": [
+          150,
+          "Play (Instrumental)"
+        ]
+      },
+      {
+        "_index": "record-crate",
+        "_type": "song",
+        "_id": "54e9f7958fe9180376c964b5093322fec74500b7",
+        "_score": null,
+        "_source": {
+          "id": "54e9f7958fe9180376c964b5093322fec74500b7",
+          "title": "Immunity (Original Mix)",
+          "sortable_title": "Immunity (Original Mix)",
+          "artist": "Jon Hopkins",
+          "album": "Immunity",
+          "path": "/music/orchestral/4429481_Immunity_Original_Mix.mp3",
+          "images": [
+            "54e9f7958fe9180376c964b5093322fec74500b7_0.jpg",
+            "54e9f7958fe9180376c964b5093322fec74500b7_1.png"
+          ],
+          "year": 2013,
+          "genre": [
+            "Electronica"
+          ],
+          "bpm": 140,
+          "created": "2014-12-18T17:41:57.000Z"
+        },
+        "sort": [
+          140,
+          "Immunity (Original Mix)"
+        ]
+      },
+      {
+        "_index": "record-crate",
+        "_type": "song",
+        "_id": "1b1ebb435781c6110cc7265e57246c30aeee1dbf",
+        "_score": null,
+        "_source": {
+          "id": "1b1ebb435781c6110cc7265e57246c30aeee1dbf",
+          "title": "The Bells (Original Mix)",
+          "sortable_title": "The Bells (Original Mix)",
+          "artist": "Jeff Mills",
+          "album": "SEQUENCE - A Retrospective Of Axis Records",
+          "path": "/music/intense:minimal/4043392_The_Bells_Original_Mix.mp3",
+          "images": [
+            "1b1ebb435781c6110cc7265e57246c30aeee1dbf_0.jpg",
+            "1b1ebb435781c6110cc7265e57246c30aeee1dbf_1.png"
+          ],
+          "year": 2013,
+          "genre": [
+            "Techno"
+          ],
+          "bpm": 138,
+          "created": "2014-12-18T17:42:02.000Z"
+        },
+        "sort": [
+          138,
+          "The Bells (Original Mix)"
+        ]
+      },
+      {
+        "_index": "record-crate",
+        "_type": "song",
+        "_id": "4086430658a74d1ee9071102511bc8cb33360653",
+        "_score": null,
+        "_source": {
+          "id": "4086430658a74d1ee9071102511bc8cb33360653",
+          "title": "VW Jetta (Original Mix)",
+          "sortable_title": "VW Jetta (Original Mix)",
+          "artist": "Modeselektor",
+          "album": "Modeselektion Vol.01",
+          "path": "/music/techno/4141349_VW_Jetta_Original_Mix.mp3",
+          "images": [
+            "4086430658a74d1ee9071102511bc8cb33360653_0.jpg",
+            "4086430658a74d1ee9071102511bc8cb33360653_1.png"
+          ],
+          "year": 2010,
+          "genre": [
+            "Electronica"
+          ],
+          "bpm": 138,
+          "created": "2014-12-18T17:41:52.000Z"
+        },
+        "sort": [
+          138,
+          "VW Jetta (Original Mix)"
+        ]
+      }
+    ]
+  }
+}

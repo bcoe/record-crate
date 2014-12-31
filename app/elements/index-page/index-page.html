@@ -11,6 +11,7 @@
       <core-ajax id="ajaxIndex"
                url="//localhost:5000/reindex"
                body='{"path":"{{path}}"}'
+               headers='{"Content-Type": "application/json"}'
                handleAs="json"
                method="POST"
                on-core-response="{{goBack}}"></core-ajax>

@@ -41,10 +41,11 @@
 
   <template id="app" is="auto-binding">
     <core-ajax id="ajax"
-               url="//localhost:5000/"
-               body='{"q":"*"}'
+               url="//localhost:5000"
+               params='{"q": "*"}'
+               headers='{"Content-Type": "application/json"}'
                handleAs="json"
-               method="POST"
+               method="GET"
                response="{{crate}}"></core-ajax>
     <core-media-query query="min-width: 640px" queryMatches="{{largeScreen}}">
     </core-media-query>
