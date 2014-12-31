@@ -9,21 +9,6 @@
   <template>
     <link rel="stylesheet" href="crate-page.css">
 
-    <paper-action-dialog id="searchDialog">
-      <paper-item id="search-name" noink>
-        <paper-input class="item item-input"
-                     label="Name"
-                     value="{{name}}"
-                     id="searchInput"
-                     noink
-                     autofocus>
-        </paper-input>
-        <a id="click-search-name" on-click="{{searchName}}">
-          <paper-icon-button id="check-search-name" icon="check" affirmative></paper-icon-button>
-        </a>
-      </paper-item>
-    </paper-action-dialog>
-
     <core-drawer-panel id="drawerPanel" forceNarrow>
 
       <!-- Drawer -->
@@ -45,13 +30,22 @@
             <paper-icon-button icon="menu" core-drawer-toggle>
             </paper-icon-button>
             <div id="title" flex>{{heading}}</div>
-
-            <paper-menu-button id="menuBtn" noink>
-              <paper-icon-button icon="search" noink on-tap="{{toggleSearch}}"></paper-icon-button>
-            </paper-menu-button>
-
           </core-toolbar>
           <div class="content">
+
+            <paper-item id="search-name" noink>
+              <paper-input class="item item-input"
+                           label="Name"
+                           value="{{name}}"
+                           id="searchInput"
+                           noink
+                           autofocus
+                           style="width: 95%">
+              </paper-input>
+              <a id="click-search-name" on-click="{{searchName}}">
+                <paper-icon-button id="check-search-name" icon="check" affirmative></paper-icon-button>
+              </a>
+            </paper-item>
 
             <core-list id="list" data="{{crate.tracks}}"
                                  scrollTarget="{{$.headerPanel.scroller}}"
