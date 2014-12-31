@@ -1,4 +1,5 @@
-var Code = require('code'),
+var _ = require('lodash'),
+  Code = require('code'),
   fs = require('fs'),
   Indexer = require('../lib/indexer'),
   Lab = require('lab'),
@@ -76,6 +77,19 @@ lab.experiment('Indexer', function () {
         imageFolder: './test/fixtures/images',
         _saveImages: function(meta, cb) {
           Code.expect(meta.title).to.equal('foo.txt');
+          return done();
+        }
+      });
+
+      indexer._indexMp3('./test/fixtures/subfolder/foo.txt');
+    });
+
+    lab.it('populates created with ctime from fs.stat', function(done) {
+      var indexer = new Indexer({
+        musicFolder: './test/fixtures', // folder to crawl for music collection.
+        imageFolder: './test/fixtures/images',
+        _saveImages: function(meta, cb) {
+          Code.expect(_.isDate(meta.created)).to.equal(true);
           return done();
         }
       });

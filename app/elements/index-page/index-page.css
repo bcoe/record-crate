@@ -1,0 +1,88 @@
+*, *::after, *::before {
+  box-sizing: border-box; }
+
+:host {
+  display: block;
+  background-color: white; }
+
+paper-fab {
+  background-color: #4540ff; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg); } }
+
+core-toolbar {
+  color: white;
+  background-color: #1f285a; }
+
+core-toolbar a {
+  color: white; }
+
+core-toolbar [icon="arrow-back"] {
+  padding-left: 0; }
+
+#title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.content {
+  background-color: #FFFFFF; }
+
+.item {
+  margin-left: 16px;
+  color: rgba(0, 0, 0, 0.54); }
+
+.item:last-child {
+  margin-right: 16px; }
+
+.item-icon {
+  margin-top: 8px;
+  width: 40px; }
+
+.item-input {
+  color: rgba(0, 0, 0, 0.54);
+  border-color: rgba(0, 0, 0, 0.54); }
+
+.item-input /deep/ .unfocused-underline {
+  /* line and cursor color when the input has focus */
+  background-color: rgba(0, 0, 0, 0.54); }
+
+.item-input /deep/ .focused-underline,
+.item-input /deep/ .cursor {
+  /* line and cursor color when the input has focus */
+  background-color: #4540ff; }
+
+.item-menu {
+  width: 100px; }
+
+.item-menu /deep/ #control[selected] {
+  color: rgba(0, 0, 0, 0.54); }
+
+.animate-spinning {
+  -webkit-animation: spin 2s infinite linear !important;
+  animation: spin 2s infinite linear !important; }
+
+@media screen and (min-width: 640px) {
+  :host {
+    background-color: transparent; }
+
+  .content {
+    margin: 64px auto;
+    padding-bottom: 16px;
+    width: 640px; } }

@@ -56,39 +56,19 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/elements/{,*/}*.css'
         ],
         tasks: ['copy:styles', 'autoprefixer:server']
-      },
-      sass: {
-        files: [
-          '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
-          '<%= yeoman.app %>/elements/{,*/}*.{scss,sass}'
-        ],
-        tasks: ['sass:server', 'autoprefixer:server']
       }
     },
-    // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
         sourcemap: false,
         loadPath: 'bower_components'
       },
       dist: {
-        options: {
-          style: 'compressed'
-        },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['styles/{,*/}*.{scss,sass}', 'elements/{,*/}*.{scss,sass}'],
-          dest: '<%= yeoman.dist %>',
-          ext: '.css'
-        }]
-      },
-      server: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>',
-          src: ['styles/{,*/}*.{scss,sass}', 'elements/{,*/}*.{scss,sass}'],
-          dest: '.tmp',
+          cwd: './app',
+          src: ['**/*.scss'],
+          dest: './app',
           ext: '.css'
         }]
       }
@@ -293,7 +273,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'sass:server',
       'copy:styles',
       'autoprefixer:server',
       'connect:livereload',
@@ -323,7 +302,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'jshint',
-    // 'test'
     'build'
   ]);
 };
