@@ -86,31 +86,12 @@
       domReady: function() {
         this.$.list.updateSize();
 
-        var d = this.$.searchDialog;
-        if (!d) {
-          return;
-        }
         var s = this;
-
-        var searchButton = this.$['click-search-name'];
-        var event = new CustomEvent('click', {});
-        this.$.searchInput.addEventListener("keyup", function(e) {
-          if(e.keyCode == 13) {
-            e.preventDefault();
-            s.searchName();
-            d.toggle();
-          }
+        this.$.searchInput.addEventListener("change", function(e) {
+          s.searchName();
         });
 
         this.super();
-      },
-      toggleSearch: function(e) {
-        var d = this.$.searchDialog;
-        if (!d) {
-          return;
-        }
-        d.toggle();
-        this.$.searchInput.focus();
       },
       searchName: function(e) {
         if(this._crate === null)
