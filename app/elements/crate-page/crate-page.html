@@ -1,8 +1,8 @@
 <link rel="import" href="../base-page/base-page.html">
 <link rel="import" href="../../bower_components/core-list/core-list.html">
-<link rel="import" href="../../bower_components/core-menu/core-menu.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-action-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <polymer-element name="crate-page" extends="base-page"
                  attributes="crate heading">
@@ -30,9 +30,22 @@
             <paper-icon-button icon="menu" core-drawer-toggle>
             </paper-icon-button>
             <div id="title" flex>{{heading}}</div>
-
           </core-toolbar>
           <div class="content">
+
+            <paper-item id="search-name" noink>
+              <paper-input class="item item-input"
+                           label="Name"
+                           value="{{name}}"
+                           id="searchInput"
+                           noink
+                           autofocus
+                           style="width: 95%">
+              </paper-input>
+              <a id="click-search-name" on-click="{{searchName}}">
+                <paper-icon-button id="check-search-name" icon="check" affirmative></paper-icon-button>
+              </a>
+            </paper-item>
 
             <core-list id="list" data="{{crate.tracks}}"
                                  scrollTarget="{{$.headerPanel.scroller}}"
@@ -69,9 +82,31 @@
   <script>
   (function() {
     Polymer({
-      willPrepare: function() {
+      _crate: null,
+      domReady: function() {
+        this.$.list.updateSize();
+
+        var s = this;
+        this.$.searchInput.addEventListener("change", function(e) {
+          s.searchName();
+        });
+
         this.super();
-        this.$.list.updateSize()
+      },
+      searchName: function(e) {
+        if(this._crate === null)
+          this._crate = JSON.parse(JSON.stringify(this.crate));
+        this.crate.tracks = this._crate.tracks;
+
+        var search = this.$.searchInput.value;
+        if(search == '' || search == '*') {
+          return;
+        }
+
+        function hasElement(element) {
+          return element.title.toLowerCase().indexOf(search.toLowerCase()) > -1;
+        };
+        this.crate.tracks = this.crate.tracks.filter(hasElement);
       },
       getUrl: function(idx) {
         return window.location.pathname + '/' + idx;
