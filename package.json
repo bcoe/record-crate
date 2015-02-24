@@ -39,7 +39,7 @@
   "preferglobal": true,
   "dependencies": {
     "async": "^0.9.0",
-    "chalk": "^0.5.1",
+    "chalk": "^1.0.0",
     "connect-livereload": "~0.4.0",
     "connect-redirection": "0.0.1",
     "elasticsearch": "^3.0.0",
